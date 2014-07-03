@@ -215,6 +215,7 @@ game.player = {
 }
 game.misslespawner = {
 	img: undefined,
+	boomimg: undefined,
 	update: function(delta) {
 		if (Math.random() < .1) {
 			this.spawn(point(config.size.width, Math.random() * config.size.height))
@@ -223,22 +224,28 @@ game.misslespawner = {
 	init: function() {
 		this.img = new Image()
 		this.img.src = "img/missle.png"
+		this.boomimg = new Image()
+		this.boomimg.src = "img/boom.png"
 	},
 	createMissle: function(pos) {
 		return {
 			pos: pos,
 			remove: false,
+			exploded: false,
 			offsetoffset: Math.PI * Math.random(),
 			update: function(delta) {
 				if (!game.player.dead) {
 					this.pos.x += config.missles.vel * delta
 					if (areCollided(this.getRect(), game.player.getRect())) {
 						game.player.die()
+						this.exploded = true
 					}
 				}
 			},
 			render: function(delta) {
-				if (game.misslespawner.img !== undefined) {
+				if (this.exploded && game.misslespawner.boomimg !== undefined) {
+					context.drawImage(game.misslespawner.boomimg, this.pos.x - 16, this.pos.y - 16 + this.offset())
+				} else if (game.misslespawner.img !== undefined) {
 					context.drawImage(game.misslespawner.img, this.pos.x, this.pos.y - config.missles.size.height/2 + this.offset())
 				}
 			},
