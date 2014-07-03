@@ -118,6 +118,10 @@ game = {
 		canvas.width = config.size.width;
 		canvas.height = config.size.height;
 
+		controls.onPress(config.keys.r, function() {
+			game.reset()
+		})
+
 		game.world.init()
 		game.player.init()
 		game.misslespawner.init()
