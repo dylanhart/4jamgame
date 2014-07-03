@@ -227,6 +227,7 @@ game.misslespawner = {
 		return {
 			pos: pos,
 			remove: false,
+			offsetoffset: Math.PI * Math.random(),
 			update: function(delta) {
 				if (!game.player.dead) {
 					this.pos.x += config.missles.vel * delta
@@ -241,7 +242,7 @@ game.misslespawner = {
 				}
 			},
 			offset: function() {
-				return Math.cos(this.pos.x/80)*5
+				return Math.cos(this.pos.x/(config.size.width/Math.PI) + this.offsetoffset)*30
 			},
 			reset: function() {
 				this.remove = true;
