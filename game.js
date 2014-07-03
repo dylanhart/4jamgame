@@ -195,6 +195,7 @@ game.player = {
 		this.vel = point(0, 0)
 		this.dead = false
 		this.jumps = 2
+		this.score = 0
 	},
 	jump: function() {
 		if (this.jumps > 0) {
