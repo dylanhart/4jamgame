@@ -24,7 +24,8 @@ config = {
 			width: 32,
 			height: 16
 		},
-		vel: -.5
+		vel: -.6,
+		veldiff: .1
 	},
 	keys: {
 		left: 37,
@@ -233,9 +234,10 @@ game.misslespawner = {
 			remove: false,
 			exploded: false,
 			offsetoffset: Math.PI * Math.random(),
+			speed: config.missles.vel + (Math.random() * config.missles.veldiff * 2) - config.missles.veldiff, 
 			update: function(delta) {
 				if (!game.player.dead) {
-					this.pos.x += config.missles.vel * delta
+					this.pos.x += this.speed * delta
 					if (areCollided(this.getRect(), game.player.getRect())) {
 						game.player.die()
 						this.exploded = true
