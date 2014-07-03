@@ -85,10 +85,10 @@ var controls = {
 		}
 		this.callbacks[key].push(func);
 	},
-	getState: function(name) {
-		var state = this.keystate[config.keymap[name]];
+	getKey: function(key) {
+		var state = this.keystate[key];
 		if (state === undefined) {
-			return this.keystate[config.keymap[name]] = false;
+			return this.keystate[key] = false;
 		}
 		return state;
 	},
